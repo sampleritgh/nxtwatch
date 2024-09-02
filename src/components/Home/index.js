@@ -1,12 +1,12 @@
-import React, { Component } from 'react'; // Fixed import statement
-import Cookies from 'js-cookie';
-import Loader from 'react-loader-spinner';
-import { AiOutlineClose, AiOutlineSearch } from 'react-icons/ai'; // Fixed spelling of AiOutlineClose
-import Header from './Header'; // Added missing quotes
-import NavigationBar from '../NavigationBar';
-import ThemeAndVideoContext from '../../context/ThemeAndVideoContext';
-import HomeVideos from '../HomeVideos';
-import FailureView from '../FailureView';
+import {Component} from 'react' // Fixed import statement
+import Cookies from 'js-cookie'
+import Loader from 'react-loader-spinner'
+import {AiOutlineClose, AiOutlineSearch} from 'react-icons/ai' // Fixed spelling of AiOutlineClose
+import Header from '../Header' // Added missing quotes
+import NavigationBar from '../NavigationBar'
+import ThemeAndVideoContext from '../../context/ThemeAndVideoContext'
+import HomeVideos from '../HomeVideos'
+import FailureView from '../FailureView'
 import {
   HomeContainer,
   BannerContainer,
@@ -20,14 +20,14 @@ import {
   BannerRightPart,
   BannerCloseButton, // Fixed name from 'Banner CloseButton' to 'BannerCloseButton'
   LoaderContainer,
-} from './styledComponents';
+} from './styledComponents'
 
 const apiStatusConstants = {
   initial: 'INITIAL',
   success: 'SUCCESS',
   failure: 'FAILURE',
   inProgress: 'IN_PROGRESS', // Changed "IN PROGRESS" to "IN_PROGRESS"
-};
+}
 
 class Home extends Component {
   state = {
@@ -35,29 +35,29 @@ class Home extends Component {
     searchInput: '',
     apiStatus: apiStatusConstants.initial,
     bannerDisplay: 'flex',
-  };
+  }
 
   componentDidMount() {
-    this.getVideos();
+    this.getVideos()
   }
 
   getVideos = async () => {
-    const { searchInput } = this.state;
+    const {searchInput} = this.state
 
-    this.setState({ apiStatus: apiStatusConstants.inProgress });
+    this.setState({apiStatus: apiStatusConstants.inProgress})
 
-    const jwtToken = Cookies.get('jwt_token');
-    const url = https://apis.ccbp.in/videos/all?search=${searchInput}; // Fixed template literal
+    const jwtToken = Cookies.get('jwt_token')
+    const url = `https://apis.ccbp.in/videos/all?search=${searchInput}` // Fixed template literal
     const options = {
       headers: {
-        Authorization: Bearer ${jwtToken}, // Fixed template literal
+        Authorization: `Bearer ${jwtToken}`, // Fixed template literal
       },
       method: 'GET',
-    };
+    }
 
-    const response = await fetch(url, options);
+    const response = await fetch(url, options)
     if (response.ok) {
-      const data = await response.json();
+      const data = await response.json()
       const updatedData = data.videos.map(eachVideo => ({
         id: eachVideo.id,
         title: eachVideo.title,
@@ -66,70 +66,70 @@ class Home extends Component {
         publishedAt: eachVideo.published_at,
         name: eachVideo.channel.name,
         profileImageUrl: eachVideo.channel.profile_image_url,
-      }));
+      }))
 
       this.setState({
         homeVideos: updatedData,
         apiStatus: apiStatusConstants.success,
-      });
+      })
     } else {
-      this.setState({ apiStatus: apiStatusConstants.failure });
+      this.setState({apiStatus: apiStatusConstants.failure})
     }
-  };
+  }
 
   onCloseBanner = () => {
-    this.setState({ bannerDisplay: 'none' });
-  };
+    this.setState({bannerDisplay: 'none'})
+  }
 
   onChangeInput = event => {
-    this.setState({ searchInput: event.target.value });
-  };
+    this.setState({searchInput: event.target.value})
+  }
 
   getSearchResults = () => {
-    this.getVideos();
-  };
+    this.getVideos()
+  }
 
   onRetry = () => {
-    this.setState({ searchInput: '' }, this.getVideos);
-  };
+    this.setState({searchInput: ''}, this.getVideos)
+  }
 
   renderLoadingView = () => (
     <LoaderContainer data-testid="loader">
       <Loader type="ThreeDots" color="#000" height="50" width="50" />
     </LoaderContainer>
-  );
+  )
 
   renderVideosView = () => {
-    const { homeVideos } = this.state;
-    return <HomeVideos homeVideos={homeVideos} onRetry={this.onRetry} />;
-  };
+    const {homeVideos} = this.state
+    return <HomeVideos homeVideos={homeVideos} onRetry={this.onRetry} />
+  }
 
-  renderFailureView = () => <FailureView onRetry={this.onRetry} />;
+  renderFailureView = () => <FailureView onRetry={this.onRetry} />
 
   renderHomeVideos = () => {
-    const { apiStatus } = this.state;
+    const {apiStatus} = this.state
 
     switch (apiStatus) {
       case apiStatusConstants.success:
-        return this.renderVideosView();
+        return this.renderVideosView()
       case apiStatusConstants.failure:
-        return this.renderFailureView();
+        return this.renderFailureView()
       case apiStatusConstants.inProgress:
-        return this.renderLoadingView();
+        return this.renderLoadingView()
       default:
-        return null;
+        return null
     }
-  };
+  }
 
   render() {
-    const { searchInput, bannerDisplay } = this.state;
+    const {searchInput, bannerDisplay} = this.state
     return (
       <ThemeAndVideoContext.Consumer>
         {value => {
-          const { isDarkTheme } = value;
-          const bgColor = isDarkTheme ? '#181818' : '#ffffff'; // Set appropriate background colors
-          const textColor = isDarkTheme ? '#ffffff' : '#231420'; // Set appropriate text colors
-          const display = bannerDisplay === 'flex' ? 'flex' : 'none';
+          const {isDarkTheme} = value
+          const bgColor = isDarkTheme ? '#181818' : '#ffffff' // Set appropriate background colors
+          const textColor = isDarkTheme ? '#ffffff' : '#231420' // Set appropriate text colors
+          const display = bannerDisplay === 'flex' ? 'flex' : 'none'
 
           return (
             <HomeContainer data-testid="home" bgColor={bgColor}>
@@ -147,7 +147,10 @@ class Home extends Component {
                   <BannerButton type="button">GET IT NOW</BannerButton>
                 </BannerLeftPart>
                 <BannerRightPart>
-                  <BannerCloseButton data-testid="close" onClick={this.onCloseBanner}>
+                  <BannerCloseButton
+                    data-testid="close"
+                    onClick={this.onCloseBanner}
+                  >
                     <AiOutlineClose size={25} />
                   </BannerCloseButton>
                 </BannerRightPart>
@@ -169,11 +172,11 @@ class Home extends Component {
               </SearchContainer>
               {this.renderHomeVideos()}
             </HomeContainer>
-          );
+          )
         }}
       </ThemeAndVideoContext.Consumer>
-    );
+    )
   }
 }
 
-export default Home;
+export default Home

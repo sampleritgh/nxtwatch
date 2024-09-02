@@ -15,6 +15,7 @@ import {
   ContactIcons,
   ContactNote,
   ContactImage,
+  
   NavigationSmallContainer,
   NavBar,
 } from './styledComponents'

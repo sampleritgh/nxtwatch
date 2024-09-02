@@ -3,7 +3,7 @@ import Cookies from 'js-cookie'
 import Popup from 'reactjs-popup'
 import {BsMoon, BsBrightnessHigh} from 'react-icons/bs'
 import {FiLogout} from 'react-icons/fi'
-import {MdLogout} from 'react-icons/md'
+
 import ThemeAndVideoContext from '../../context/ThemeAndVideoContext'
 import {
   LogoLink,
@@ -81,7 +81,7 @@ const Header = props => (
                     <CloseButton
                       type="button"
                       data-testid="closeButton"
-                      onClick={close}
+                      onClick={() => close()}
                     >
                       Cancel
                     </CloseButton>
@@ -125,5 +125,4 @@ const Header = props => (
     }}
   </ThemeAndVideoContext.Consumer>
 )
-
 export default withRouter(Header)

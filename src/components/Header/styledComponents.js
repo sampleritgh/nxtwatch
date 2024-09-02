@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import styled from 'styled-components'
+import {Link} from 'react-router-dom'
 
 export const NavbarHeader = styled.nav`
   position: fixed;
@@ -16,7 +16,7 @@ export const NavbarHeader = styled.nav`
     padding-left: 30px;
     padding-right: 30px;
   }
-`;
+`
 
 export const HeaderLogo = styled.img`
   width: 80px;
@@ -26,20 +26,19 @@ export const HeaderLogo = styled.img`
     width: 100px;
     height: 40px;
   }
-`;
+`
 
 export const ActionsContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-`;
+`
 
 export const ThemeButton = styled.button`
   background: none;
   border: none;
   cursor: pointer; /* Optional: Adds a pointer cursor on hover */
-`;
-
+`
 
 export const LogoutButton = styled.button`
   border: 1px solid;
@@ -57,7 +56,7 @@ export const LogoutButton = styled.button`
   @media screen and (max-width: 768px) {
     display: none;
   }
-`;
+`
 
 export const LogoutIconButton = styled.button`
   background: none;
@@ -66,19 +65,14 @@ export const LogoutIconButton = styled.button`
   @media screen and (min-width: 768px) {
     display: none;
   }
-`;
+`
 
 export const ProfileImage = styled.img`
   width: 30px;
   height: 30px;
   margin-right: 10px;
-`;
+`
 
-export const ModalContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-`;
 
 
 export const ModalContainer = styled.div`
@@ -95,7 +89,7 @@ export const ModalContainer = styled.div`
     height: 200px;
     width: 400px;
   }
-`;
+`
 
 export const CloseButton = styled.button`
   background-color: transparent;
@@ -114,8 +108,7 @@ export const CloseButton = styled.button`
     font-size: 15px;
     padding: 13px 20px; /* Combined padding shorthand */
   }
-`;
-
+`
 
 export const ConfirmButton = styled.button`
   align-self: flex-end;
@@ -135,7 +128,7 @@ export const ConfirmButton = styled.button`
     font-size: 15px;
     padding: 13px 20px; /* Combined padding shorthand */
   }
-`;
+`
 
 export const ModalDesc = styled.p`
   font-family: 'Roboto', sans-serif; /* Added fallback font */
@@ -147,10 +140,15 @@ export const ModalDesc = styled.p`
   @media screen and (min-width: 768px) {
     font-size: 20px;
   }
-`;
+`
 
 export const ButtonsContainer = styled.div`
   display: flex;
+
   justify-content: center; /* Optional: Align buttons in the center */
   /* Add any additional styles here as needed */
-`;
+
+`
+export const LogoLink = styled(Link)`
+  text-decoration : none;
+`

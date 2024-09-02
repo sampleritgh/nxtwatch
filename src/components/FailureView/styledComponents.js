@@ -19,10 +19,6 @@ export const FailedImage = styled.img`
 `
 
 // Retry button styling
-export const RetryButton = styled.button`
-  border: none;
-  border-radius: 3px;
-`
 
 // Heading for the failed view
 export const FailedHeading = styled.h1`
